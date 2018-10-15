@@ -1,0 +1,12 @@
+func getUptime() string {
+        cmdName := "awk"
+        cmdArgs := []string{"{print $1}", "/proc/uptime"}
+        out, err := exec.Command(cmdName, cmdArgs...).Output()
+        //out, err := exec.Command("cat /proc/uptime").Output()
+
+        if err != nil {
+                log.Printf("Failed to get uptime: %v\n", err)
+        }
+        return string(out[:len(out)-1])
+}
+
